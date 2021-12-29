@@ -112,23 +112,21 @@ function App() {
 
       // Addresses get 
       useEffect(() => {
-
           // no member
           if (!hasClaimedNFT) {
               return;
           }
           (async () => {
-          try {
-              // get token holder id 0
-              const addresses = await bundleDropModule.getAllClaimerAddresses("0");
-              // state thingy for addresses
-              setMemberAddresses(addresses);
-          } catch (error) {
-              console.error("Failed to get member list: ", error);
-          }
+            try {
+                // get token holder id 0
+                const addresses = await bundleDropModule.getAllClaimerAddresses("0");
+                // state thingy for addresses
+                setMemberAddresses(addresses);
+            } catch (error) {
+                console.error("Failed to get member list: ", error);
+            }
           })();
 
-          
       }, [hasClaimedNFT]);
 
       // Grab the balances
@@ -192,7 +190,7 @@ function App() {
       )
     });
   }
-
+  
   const [isCreatingNewProposal, setIsCreatingNewProposal] = useState(false);
   const [finishedCreationProposal, setFinishedCreationProposal] = useState(false);
   // Submit the new proposal onto site
@@ -240,9 +238,7 @@ function App() {
        setIsCreatingNewProposal(false);
        setFinishedCreationProposal(true);
        console.log("Successfully created new proposal! ");
-
-       
-
+            
       } catch (error) {
         console.error("Failed to create new proposal", error);
       }
