@@ -131,7 +131,6 @@ function App() {
 
       // Grab the balances
       useEffect(() => {
-
           // not members yet
           if (!hasClaimedNFT) {
               return;
@@ -311,40 +310,53 @@ function App() {
 
   
 
-
-
   // DAO Main Page for nft claimed people
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>theDAO Member Page</h1>
-        <p>Congratulations on being a member</p>
+        <h1>🛠 theDAO <br></br> Member Page</h1>
+        <p id='title'>Congratulations on being a member</p>
         <div>
-          <div>
-            <h2>Member List</h2>
-            <table className="card">
-              <thead>
-                <tr>
-                  <th>Address</th>
-                  <th>Token Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {memberList.map((member) => {
-                  return (
-                    <tr key={member.address}>
-                      <td>{shortenAddress(member.address)}</td>
-                      <td>{member.tokenAmount}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <div className="col">
 
+            <div>
+              <h2>Member List</h2>
+              <table className="card leftcard">
+                <thead>
+                  <tr>
+                    <th>Address</th>
+                    <th>Token Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {memberList.map((member) => {
+                    return (
+                      <tr key={member.address}>
+                        <td>{shortenAddress(member.address)}</td>
+                        <td>{member.tokenAmount}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="proposalCreation">
+              <h2>Propose a deposit into an address</h2>
+              <form>
+                <input className="inputs" id="address" type="text" placeholder="Address to Mint To" onChange={handleProposal}></input>
+                <input className="inputs" id="amount" type="text" placeholder="Amount of Coins To transfer" onChange={handleProposal}></input>
+              </form>
+              <button className="submitProposal" onClick={handleSubmitProposal}>
+                {displayButtonText}
+              </button>
+                  
+            </div>
+
+          </div>
           {/* new part  */}
           <div>
-            <h2>Active Proposals</h2>
+            <h2 className="righth2">Active Proposals</h2>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -471,17 +483,7 @@ function App() {
           {/* Create a proposal form */}
 
 
-          <div className="proposalCreation">
-            <h2>Propose a deposit into an address</h2>
-            <form>
-              <input id="address" type="text" placeholder="Address to Mint To" onChange={handleProposal}></input>
-              <input id="amount" type="text" placeholder="Amount of Coins To transfer" onChange={handleProposal}></input>
-            </form>
-            <button className="submitProposal" onClick={handleSubmitProposal}>
-              {displayButtonText}
-            </button>
-                
-          </div>
+          
 
         </div>
       </div>
