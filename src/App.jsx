@@ -13,7 +13,7 @@ const sdk = new ThirdwebSDK("rinkeby");
 
 //refence to the erc1155
 const bundleDropModule = sdk.getBundleDropModule(
-  "0x52C85539c26bA42d100F9735E626D4C2d907b97f",
+  "0x94891bBb0ad95a541dCEe30363DEe7Edfc6777F1",
 );
 
 
@@ -50,19 +50,23 @@ function App() {
       try {
         // list of proposals
         const pr = await voteModule.getAll();
+        console.log("proposals: ", pr);
 
-        // Filtered it out using state =1 (still alive) and state = 3 (not alive)
-        const filtered = [];
-        pr.forEach((item) => {
-          const status = item.state;
-          if (status != 3){
-            filtered.push(item);
-          }
-        })
+        // // Using state =1 (still alive) and state = 3 (not alive)
+        // const filtered = [];
+        // pr.forEach((item) => {
+        //   const status = item.state;
+        //   if (status != 3){
+        //     filtered.push(item);
+        //   } 
+        // })
 
-        // set the filtered state
-        setProposals(filtered);
-        console.log("Proposals: ", filtered);
+        // const can = await voteModule.canExecute(pr[1].proposalId);
+        // console.log(can)
+
+        // set the state
+        setProposals(pr);
+        console.log("Proposals: ", pr);
       } 
       catch (error) {
         console.error("Failed to get proposals", error);
@@ -70,6 +74,7 @@ function App() {
     })();
     
   }, [hasClaimedNFT]);
+
 
   // check if user had voted 
   useEffect(() => {
@@ -97,13 +102,12 @@ function App() {
   }, [hasClaimedNFT, proposals, address]);
 
   // erc 1155
-      const bundleDropModule = sdk.getBundleDropModule("0x52C85539c26bA42d100F9735E626D4C2d907b97f");
       //erc20
       const tokenModule = sdk.getTokenModule(
-          "0x93b336766918b2a9F696A0F4bfB516209EbB95b8",
+          "0xF6Ee7D41532570306497209f216296f2bBf70877",
       );
       // vote contract
-      const voteModule = sdk.getVoteModule("0xea81b38fB40D71A38bEcB5e4c53af336663889B2");
+      const voteModule = sdk.getVoteModule("0x010F127FA91e0f6187341f20F4916505a210Ad74");
 
 
       // amount of token each member in a state
@@ -381,7 +385,7 @@ function App() {
                   let voteResult = {
                     proposalId: proposal.proposalId,
                     //abstain by default
-                    vote: 2,
+                    vote: 1,
                   };
                   proposal.votes.forEach((vote) => {
                     const elem = document.getElementById(
@@ -400,6 +404,7 @@ function App() {
                 try {
                   //we'll check if the wallet still needs to delegate their tokens before they can vote
                   const delegation = await tokenModule.getDelegationOf(address);
+                  console.log("Delegation: ", delegation);
                   // if the delegation is the 0x0 address that means they have not delegated their governance tokens yet
                   if (delegation === ethers.constants.AddressZero) {
                     //if they haven't delegated their tokens yet, we'll have them delegate them before voting

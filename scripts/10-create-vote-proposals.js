@@ -2,17 +2,16 @@ import {ethers} from "ethers";
 import sdk from "./1-initialize-sdk.js";
 
 //the voting contract
-const voteModule = sdk.getVoteModule("0xea81b38fB40D71A38bEcB5e4c53af336663889B2");
+const voteModule = sdk.getVoteModule("0x010F127FA91e0f6187341f20F4916505a210Ad74");
 
 // erc 20 contract 
-const tokenModule = sdk.getTokenModule("0x93b336766918b2a9F696A0F4bfB516209EbB95b8");
+const tokenModule = sdk.getTokenModule("0xF6Ee7D41532570306497209f216296f2bBf70877");
 
 (async () => {
     try {
         const amount = 1_000;
         // proposal to mint 1000 more tokens to the treasury 
 
-    
             await voteModule.propose(
                 "Should theDAO mint an additional " + amount + " Tokens into the treasury?", 
                 [

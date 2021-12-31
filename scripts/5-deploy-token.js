@@ -1,6 +1,6 @@
 import sdk from './1-initialize-sdk.js';
 
-const app = sdk.getAppModule("0xe7daFa34cAB41D06d1B7928Ca33CBFad59e26136");
+const app = sdk.getAppModule("0xEA05ca8bAC4707E1D147149762b19bC319Ae2EC8");
 
 (async () => {
     try {

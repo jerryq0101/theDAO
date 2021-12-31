@@ -2,7 +2,7 @@ import sdk from "./1-initialize-sdk.js";
 
 // get app module the thirdweb thingy
 
-const appModule = sdk.getAppModule("0xe7daFa34cAB41D06d1B7928Ca33CBFad59e26136");
+const appModule = sdk.getAppModule("0xEA05ca8bAC4707E1D147149762b19bC319Ae2EC8");
 
 (async () => {
     try {
@@ -11,13 +11,13 @@ const appModule = sdk.getAppModule("0xe7daFa34cAB41D06d1B7928Ca33CBFad59e26136")
             name: "theDAO's Proposals",
 
             // voting token address
-            votingTokenAddress: "0x93b336766918b2a9F696A0F4bfB516209EbB95b8",
+            votingTokenAddress: "0xF6Ee7D41532570306497209f216296f2bBf70877",
 
             // when can people start voting?
             proposalStartWaitTimeInSeconds: 0,
 
             // how long for the vote on the proposal?
-            proposalVotingTimeInSeconds: 24*60*60,
+            proposalVotingTimeInSeconds: 60*30,
 
             votingQuorumFraction: 0,
             

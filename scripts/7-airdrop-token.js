@@ -2,10 +2,10 @@ import { ethers } from "ethers";
 import sdk from "./1-initialize-sdk.js";
 
 // erc1155 nft membership contract
-const bundleDropModule = sdk.getBundleDropModule("0x52C85539c26bA42d100F9735E626D4C2d907b97f");
+const bundleDropModule = sdk.getBundleDropModule("0x94891bBb0ad95a541dCEe30363DEe7Edfc6777F1");
 
 // erc20 token
-const tokenModule = sdk.getTokenModule("0x93b336766918b2a9F696A0F4bfB516209EbB95b8");
+const tokenModule = sdk.getTokenModule("0xF6Ee7D41532570306497209f216296f2bBf70877");
 
 (async () => {
     try {
