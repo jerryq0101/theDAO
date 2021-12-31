@@ -109,6 +109,8 @@ function App() {
           return str.substring(0, 6) + "..." + str.substring(str.length -4);
       }
 
+      const [isCreatingNewProposal, setIsCreatingNewProposal] = useState(false);
+      const [finishedCreationProposal, setFinishedCreationProposal] = useState(false);
 
       // Addresses get 
       useEffect(() => {
@@ -116,6 +118,7 @@ function App() {
           if (!hasClaimedNFT) {
               return;
           }
+
           (async () => {
             try {
                 // get token holder id 0
@@ -190,8 +193,7 @@ function App() {
     });
   }
   
-  const [isCreatingNewProposal, setIsCreatingNewProposal] = useState(false);
-  const [finishedCreationProposal, setFinishedCreationProposal] = useState(false);
+  
   // Submit the new proposal onto site
 
   async function handleSubmitProposal(){
@@ -300,7 +302,7 @@ function App() {
   if (!address) {
     return (
       <div className="landing">
-        <h1>Welcome to theDAO</h1>
+        <h1>Welcome to 🛠theDAO</h1>
         <button onClick={() => connectWallet("injected")} className="btn-hero">
           Connect your wallet 
         </button>
@@ -342,7 +344,7 @@ function App() {
             </div>
 
             <div className="proposalCreation">
-              <h2>Propose a deposit into an address</h2>
+              <h2>Propose a Deposit</h2>
               <form>
                 <input className="inputs" id="address" type="text" placeholder="Address to Mint To" onChange={handleProposal}></input>
                 <input className="inputs" id="amount" type="text" placeholder="Amount of Coins To transfer" onChange={handleProposal}></input>
@@ -516,7 +518,7 @@ function App() {
   // Render mint nft screen.
   return (
     <div className="mint-nft">
-      <h1>Mint your free the Membership NFT</h1>
+      <h1>Mint your free theDAO Membership NFT</h1>
       <button
         disabled={isClaiming}
         onClick={() => mintNft()}
