@@ -50,9 +50,19 @@ function App() {
       try {
         // list of proposals
         const pr = await voteModule.getAll();
-        // set the state
-        setProposals(pr);
-        console.log("Proposals: ", proposals);
+
+        // Filtered it out using state =1 (still alive) and state = 3 (not alive)
+        const filtered = [];
+        pr.forEach((item) => {
+          const status = item.state;
+          if (status != 3){
+            filtered.push(item);
+          }
+        })
+
+        // set the filtered state
+        setProposals(filtered);
+        console.log("Proposals: ", filtered);
       } 
       catch (error) {
         console.error("Failed to get proposals", error);
@@ -66,8 +76,6 @@ function App() {
     if (!hasClaimedNFT){
       return;
     }
-
-
     // check if finished retrieving proposals from useeffect
     if (!proposals.length) {
       return;
@@ -123,6 +131,8 @@ function App() {
             try {
                 // get token holder id 0
                 const addresses = await bundleDropModule.getAllClaimerAddresses("0");
+                console.log("All people:", addresses);
+
                 // state thingy for addresses
                 setMemberAddresses(addresses);
             } catch (error) {
@@ -173,29 +183,28 @@ function App() {
     Doing the part for the proposal creation 
   */
 
-  // Create two states
-  const [proposeDetails, setProposeDetails] = useState({
-    address: "",
-    amount: 0,
-  }); 
+    // Create two states
+    const [proposeDetails, setProposeDetails] = useState({
+      address: "",
+      amount: 0,
+    }); 
 
-  // Handles the input thingys
-  function handleProposal(event){
-    const varName = event.target.id;
-    const newVal = event.target.value;
-    setProposeDetails((prevState) => {
-      return (
-        {
-          ...prevState,
-          [varName]: newVal
-        }
-      )
-    });
-  }
+    // Handles the input thingys
+    function handleProposal(event){
+      const varName = event.target.id;
+      const newVal = event.target.value;
+      setProposeDetails((prevState) => {
+        return (
+          {
+            ...prevState,
+            [varName]: newVal
+          }
+        )
+      });
+    }
   
   
   // Submit the new proposal onto site
-
   async function handleSubmitProposal(){
     if (!hasClaimedNFT){
       return;
@@ -229,10 +238,10 @@ function App() {
                 "transfer", 
                 [
                   usrAddress,
-                  ethers.utils.parseUnits(amount.toString(), 18)
+                  ethers.utils.parseUnits(amount.toString(), 18),
                 ]
               ),
-              toAddress: tokenModule.address,
+              toAddress: voteModule.address,
             }
          ]
        )
