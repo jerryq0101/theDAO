@@ -1,3 +1,4 @@
+## [High School Project]
 # theDAO
 First DAO Project 
 using create-react-app
